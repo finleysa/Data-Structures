@@ -1,32 +1,26 @@
 package AddressBookTree;
 
-class BinaryNode<AddressMate> implements BinaryNodeInterface<AddressMate>
+import sun.reflect.generics.tree.Tree;
+
+class BinaryNode<TreeAddress> implements BinaryNodeInterface<TreeAddress>
 {
-    private AddressMate data;
-    private BinaryNodeInterface<AddressMate> left;
-    private BinaryNodeInterface<AddressMate> right;
-    private BinaryNodeInterface<AddressMate> parent;
-
-    public BinaryNodeInterface<AddressMate> getParent() {
-        return parent;
-    }
-
-    public void setParent(BinaryNodeInterface node) {
-        this.parent = node;
-    }
+    private TreeAddress data;
+    private BinaryNodeInterface<TreeAddress> left;
+    private BinaryNodeInterface<TreeAddress> right;
+    private BinaryNodeInterface<TreeAddress> parent;
 
     //region Constructors
     public BinaryNode() {
         this(null);
     }
 
-    public BinaryNode(AddressMate dataPortion)
+    public BinaryNode(TreeAddress dataPortion)
     {
         this(dataPortion, null, null);
     }
 
-    public BinaryNode(AddressMate dataPortion, BinaryNode<AddressMate> leftChild,
-                      BinaryNode<AddressMate> rightChild)
+    public BinaryNode(TreeAddress dataPortion, BinaryNode<TreeAddress> leftChild,
+                      BinaryNode<TreeAddress> rightChild)
     {
         data = dataPortion;
         left = leftChild;
@@ -35,46 +29,55 @@ class BinaryNode<AddressMate> implements BinaryNodeInterface<AddressMate>
     //endregion
 
     //region Properties
-    public AddressMate getData()
+    public TreeAddress getData()
     {
-        return data;
+        return (TreeAddress) data;
     }
 
-    public void setData(AddressMate newData)
+    public void setData(TreeAddress newData)
     {
         data = newData;
     }
 
-    public BinaryNodeInterface<AddressMate> getLeftChild()
+    public BinaryNodeInterface<TreeAddress> getLeftChild()
     {
         return left;
     }
 
-    public BinaryNodeInterface<AddressMate> getRightChild() {
+    public BinaryNodeInterface<TreeAddress> getRightChild() {
         return right;
     }
 
-    public void setLeftChild(BinaryNodeInterface<AddressMate> leftChild)
-    {
-        left = (BinaryNode<AddressMate>)leftChild;
+    public BinaryNodeInterface<TreeAddress> getParent() {
+        return parent;
     }
 
-    public void setRightChild(BinaryNodeInterface<AddressMate> rightChild) { right = (BinaryNode<AddressMate>)rightChild; }
+    public void setParent(BinaryNodeInterface<TreeAddress> node) {
+        this.parent = node;
+    }
+
+    public void setLeftChild(BinaryNodeInterface<TreeAddress> leftChild)
+    {
+        this.left = leftChild;
+    }
+
+    public void setRightChild(BinaryNodeInterface<TreeAddress> rightChild) { this.right = rightChild; }
 
     public boolean hasLeftChild()
     {
-        return left != null;
+        return this.left != null;
     }
 
     public boolean hasRightChild()
     {
-        return right != null;
+        return this.right != null;
     }
 
     public boolean isLeaf()
     {
-        return (left == null) && (right == null);
+        return (this.left == null) && (this.right == null);
     }
+
     //endregion
 
 }

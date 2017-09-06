@@ -1,90 +1,99 @@
 package AddressBookTree;
 
-import AddressBookHashBucket.AddressMate;
-
-import javax.swing.tree.TreeNode;
-
-public class BinaryTree
+public class BinaryTree implements BinaryTreeInterface<BinaryTreeAddress>
 {
-    private BinaryNode topRoot;
+    private BinaryNode<BinaryTreeAddress> topRoot;
 
     public BinaryTree() {
         topRoot = null;
     }
 
-    boolean isEmpty() {
-        return topRoot == null;
-    }
-
-    //region Insert
-    public TreeAddressMate insert(String first, String last, String phoneNum, String email) {
-        TreeAddressMate address = new TreeAddressMate(first, last, phoneNum, email);
+    public BinaryTreeAddress insert(String first, String last, String phoneNum, String email) {
+        BinaryTreeAddress address = new BinaryTreeAddress(first, last, phoneNum, email);
+        // SAF  insert address and return inserted address
         return insert(topRoot, address);
     }
 
-    private TreeAddressMate insert(BinaryNode node, TreeAddressMate newAddress) {
+    public BinaryTreeAddress lookup(String first, String last) {
+        // SAF  return null if no topRoot
+        if (isEmpty()) return null;
+        BinaryTreeAddress newAddress = new BinaryTreeAddress(first, last);
+        BinaryTreeAddress rootAddress = topRoot.getData();
+
+        // SAF  if lookup address is equal to topROot return
+        if (rootAddress.compareTo(newAddress) == 0) {
+            return rootAddress;
+        }
+        // SAF  find address in tree and return if not null
+        BinaryNode<BinaryTreeAddress> found = lookup(topRoot, newAddress);
+        if (found == null) return null;
+        return found.getData();
+    }
+
+    public BinaryTreeAddress delete(String first, String last) {
+        // SAF  return if no topRoot
+        if (isEmpty()) return null;
+
+        // SAF  find address in tree
+        BinaryNode<BinaryTreeAddress> foundNode = lookup(topRoot, new BinaryTreeAddress(first, last));
+        if(foundNode == null) return null;
+
+        // SAF  remove address from tree and return deleted address
+        removeAndReplaceNode(foundNode);
+        return foundNode.getData();
+
+    }
+
+    //region Helper functions
+    private BinaryTreeAddress insert(BinaryNode<BinaryTreeAddress> node, BinaryTreeAddress newAddress) {
+        // SAF  if no topRoot the newAddress becomes topRoot and returns
         if(isEmpty()) {
-            topRoot = new BinaryNode(newAddress);
+            topRoot = new BinaryNode<>(newAddress);
             return newAddress;
         }
-        TreeAddressMate rootAddress = (TreeAddressMate)node.getData();
-        if(rootAddress == null) return null;
 
+        // SAF  get topRoot data
+        BinaryTreeAddress rootAddress = node.getData();
+
+        // SAF  compare topRoot to address
         int comparison = rootAddress.compareTo(newAddress);
 
-        @SuppressWarnings("unchecked")
-        BinaryNode newEntry = new BinaryNode(newAddress);
+        BinaryNode<BinaryTreeAddress> newEntry = new BinaryNode<>(newAddress);
+
         if(comparison < 0) {
+            // SAF  if newAddress is less than topRoot set leftChild to newAddress
             if(!node.hasLeftChild()) {
                 newEntry.setParent(node);
                 node.setLeftChild(newEntry);
                 node.getLeftChild().setParent(node);
             }
             else {
-                node = (BinaryNode) node.getLeftChild();
+                node = (BinaryNode<BinaryTreeAddress>) node.getLeftChild();
                 return insert(node, newAddress);
             }
         } else if (comparison > 0) {
+            // SAF  if newAddress is less than topRoot set rightChild to newAddress
             if(!node.hasRightChild()){
                 newEntry.setParent(node);
                 node.setRightChild(newEntry);
                 node.getRightChild().setParent(node);
             }
             else {
-                node = (BinaryNode) node.getRightChild();
+                node = (BinaryNode<BinaryTreeAddress>) node.getRightChild();
                 return insert(node, newAddress);
             }
         } else {
+            // SAF  if node rootAddress == newEntry set data to newEntry
             node.setData(newAddress);
         }
-        return (TreeAddressMate)newEntry.getData();
+        return newEntry.getData();
     }
 
-    public TreeAddressMate lookup(String first, String last) {
-        if (isEmpty()) return null;
-        TreeAddressMate newAddress = new TreeAddressMate(first, last);
-        TreeAddressMate rootAddress = (TreeAddressMate) topRoot.getData();
-
-        if (rootAddress.compareTo(newAddress) == 0) {
-            return rootAddress;
-        }
-
-        BinaryNode found = lookup(topRoot, newAddress);
-        if (found == null){
-            return null;
-        }
-        return (TreeAddressMate)lookup(topRoot, newAddress).getData();
-    }
-
-    //endregion
-    
-    private BinaryNode lookup(BinaryNode node, TreeAddressMate newAddress) {
-        TreeAddressMate rootAddress = (TreeAddressMate)node.getData();
+    private BinaryNode<BinaryTreeAddress> lookup(BinaryNode<BinaryTreeAddress> node, BinaryTreeAddress newAddress) {
+        BinaryTreeAddress rootAddress = node.getData();
         int comparison = rootAddress.compareTo(newAddress);
 
-        @SuppressWarnings("unchecked")
-        BinaryNode newEntry = new BinaryNode(newAddress);
-
+        // SAF  recursive lookup of node until found or no children
         if(comparison == 0) {
             return node;
         }
@@ -93,31 +102,22 @@ public class BinaryTree
                 return null;
             }
             else {
-                node = (BinaryNode) node.getLeftChild();
+                node = (BinaryNode<BinaryTreeAddress>) node.getLeftChild();
                 return lookup(node, newAddress);
             }
         } else {
             if (!node.hasRightChild()) {
                 return null;
             } else {
-                node = (BinaryNode) node.getRightChild();
+                node = (BinaryNode<BinaryTreeAddress>) node.getRightChild();
                 return lookup(node, newAddress);
             }
         }
     }
 
-    public TreeAddressMate delete(String first, String last) {
-        if (isEmpty()) return null;
-        BinaryNode foundNode = lookup(topRoot, new TreeAddressMate(first, last));
-        if(foundNode == null) return null;
-
-        removeAndReplaceNode(foundNode);
-        return (TreeAddressMate) foundNode.getData();
-
-    }
-    
-    private BinaryNodeInterface getRightMostChildParent(BinaryNodeInterface node) {
-        BinaryNodeInterface parent = node;
+    private BinaryNodeInterface<BinaryTreeAddress> getRightMostChildParent(BinaryNodeInterface<BinaryTreeAddress> node) {
+        // SAF  return the rightmost child of node
+        BinaryNodeInterface<BinaryTreeAddress> parent = node;
         while(node.hasRightChild()) {
             parent = node;
             node = node.getRightChild();
@@ -125,38 +125,45 @@ public class BinaryTree
         return parent;
     }
 
-    private BinaryNode removeAndReplaceNode(BinaryNode found) {
+    private void removeAndReplaceNode(BinaryNode<BinaryTreeAddress> found) {
         if (found.isLeaf()) {
+            // SAF  remove node from chain if leaf
             if(found.getParent().getRightChild() == found) {
                 found.getParent().setRightChild(null);
             } else {
                 found.getParent().setLeftChild(null);
             }
-            found = null;
-
         } else if (found.hasLeftChild()) {
+            // SAF remove node from chain and replace with leftChild
             if(found.getParent().getRightChild() == found) {
                 found.getParent().setRightChild(found.getLeftChild());
             } else {
                 found.getParent().setLeftChild(found.getLeftChild());
             }
-            found = null;
         } else if (found.hasRightChild()) {
+            // SAF remove node from chain and replace with rightChild
             if(found.getParent().getRightChild() == found) {
                 found.getParent().setRightChild(found.getRightChild());
             } else {
                 found.getParent().setLeftChild(found.getRightChild());
             }
-            found = null;
-
         } else {
-            BinaryNodeInterface parent = getRightMostChildParent(found.getLeftChild());
-            BinaryNodeInterface rightMostNode = parent.getRightChild();
+            // SAF  if node not a leaf
+            // SAF  change left child node to left child node's right most node
+            // SAF  gets the child closest to the removed nodes value
+            BinaryNodeInterface<BinaryTreeAddress> parent = getRightMostChildParent(found.getLeftChild());
+            BinaryNodeInterface<BinaryTreeAddress> rightMostNode = parent.getRightChild();
+
+            // SAF  replace node with rightMostNode
             found.setData(rightMostNode.getData());
-            found.setLeftChild(rightMostNode.getLeftChild());
-            found.setRightChild(rightMostNode.getRightChild());
+            // SAF  remove rightMostNode from old position
             parent.setRightChild(null);
         }
-        return found;
     }
+
+    boolean isEmpty() {
+        // SAF  returns null if tree is empty
+        return topRoot == null;
+    }
+    // SAF endregion
 }

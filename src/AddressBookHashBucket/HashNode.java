@@ -1,13 +1,13 @@
 package AddressBookHashBucket;
 
-public class MeNode<K, V>  implements MeNodeInterface<K, V>{
+public class HashNode<K, V>  implements HashNodeInterface<K, V> {
 
     private K key;
     private V value;
-    private MeNode next;
-    private MeNode previous;
+    private HashNode next;
+    private HashNode previous;
 
-    MeNode(K key, V value) {
+    HashNode(K key, V value) {
         this.key = key;
         this.value = value;
     }
@@ -24,17 +24,17 @@ public class MeNode<K, V>  implements MeNodeInterface<K, V>{
         this.value = value;
     }
 
-    public MeNode getNext() {
+    public HashNode getNext() {
         return next;
     }
 
-    public void setNext(MeNode next) {
+    public void setNext(HashNode next) {
         if(next != this && next != previous) this.next = next;
     }
 
-    public MeNode getPrevious() { return previous; }
+    public HashNode getPrevious() { return previous; }
 
-    public void setPrevious(MeNode previous) {
+    public void setPrevious(HashNode previous) {
         if(previous != this && previous != next) this.previous = previous;
     }
 

@@ -2,44 +2,70 @@ package AddressBookTree;
 
 interface BinaryNodeInterface<T>
 {
-    /** Retrieves the data portion of this node.
-     @return the object in the data portion of the node */
-    public T getData();
+    /** SAF
+     * Gets data of this
+     * @return stored node data
+     */
+    T getData();
 
-    /** Sets the data portion of this node.
-     @param newData  the data object */
-    public void setData(T newData);
+    /** SAF
+     * Store data
+     * @param newData set node data
+     */
+    void setData(T newData);
 
-    public BinaryNodeInterface<T> getParent();
-    public void setParent(BinaryNodeInterface node);
+    /** SAF
+     * Gets node parent
+     * @return node parent
+     */
+    BinaryNodeInterface<T> getParent();
 
+    /** SAF
+     * Node set parent of this
+     * @param node set parent of node
+     */
+    void setParent(BinaryNodeInterface<T> node);
 
-        /** Retrieves the left child of this node.
-         @return the node that is this node�s left child */
-    public BinaryNodeInterface<T> getLeftChild();
+    /** SAF
+     * Gets left child node of this
+     * @return left child node
+     */
+    BinaryNodeInterface<T> getLeftChild();
 
-    /** Retrieves the right child of this node.
-     @return the node that is this node�s right child */
-    public BinaryNodeInterface<T> getRightChild();
+    /** SAF
+     * Gets right child node of this
+     * @return right child node
+     */
+    BinaryNodeInterface<T> getRightChild();
 
-    /** Sets the node�s left child to a given node.
-     @param leftChild  a node that will be the left child */
-    public void setLeftChild(BinaryNodeInterface<T> leftChild);
+    /** SAF
+     * Sets left child node of this
+     * @param leftChild sets left child node
+     */
+    void setLeftChild(BinaryNodeInterface<T> leftChild);
 
-    /** Sets the node�s right child to a given node.
-     @param rightChild  a node that will be the right child */
-    public void setRightChild(BinaryNodeInterface<T> rightChild);
+    /** SAF
+     * Sets right child of this
+     * @param rightChild sets right child node
+     */
+    void setRightChild(BinaryNodeInterface<T> rightChild);
 
-    /** Detects whether this node has a left child.
-     @return true if the node has a left child */
-    public boolean hasLeftChild();
+    /** SAF
+     *  Has left child bool
+     * @return if node has left child
+     */
+    boolean hasLeftChild();
 
-    /** Detects whether this node has a right child.
-     @return true if the node has a right child */
-    public boolean hasRightChild();
+    /** SAF
+     * Has right child bool
+     * @return if node has right child
+     */
+    boolean hasRightChild();
 
-    /** Detects whether this node is a leaf.
-     @return true if the node is a leaf */
-    public boolean isLeaf();
+    /** SAF
+     * This has no left or right child
+     * @return tree does not have children
+     */
+    boolean isLeaf();
 
-} // end BinaryNodeInterface
+}

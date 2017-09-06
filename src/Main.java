@@ -1,39 +1,41 @@
-import AddressBookHashBucket.AddressMate;
-import AddressBookHashBucket.MeAddressBook;
+import AddressBookHashBucket.HashHashAddressBook;
 import AddressBookTree.BinaryTree;
-import AddressBookTree.TreeAddressMate;
+import AddressBookTree.BinaryTreeAddress;
 
 public class Main {
+
     static int testCase = 0;
+    static int passed = 0;
+    static int failed = 0;
 
     public static void main(String[] args) {
 
-        MeAddressBook hashAddressBook = new MeAddressBook(13);
-        TestHashInsert(hashAddressBook, true, "Bob", "Smith"," 555-235-1111", "bsmith@somewhere.com");
-        TestHashInsert(hashAddressBook, true,"Jane", "Williams"," 555-235-1112", "jw@something.com");
-        TestHashInsert(hashAddressBook, true,"Mohammed", "al-Salam","555-235-1113", "mas@someplace.com");
-        TestHashInsert(hashAddressBook, true,"Pat", "Jones","555-235-1114", "pjones@homesweethome.com");
-        TestHashInsert(hashAddressBook, true,"Billy", "Kidd","555-235-1115", "billy_the_kid@nowhere.com");
-        TestHashInsert(hashAddressBook, true,"H.", "Houdini","555-235-1116", "houdini@noplace.com");
-        TestHashInsert(hashAddressBook, true,"Jack", "Jones","555-235-1117", "jjones@hill.com");
-        TestHashInsert(hashAddressBook, true,"Jill", "Jones","555-235-1118", "jillj@hill.com");
-        TestHashInsert(hashAddressBook, true,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
-        TestHashInsert(hashAddressBook, true,"Jane", "Doe","555-235-1120", "jdoe@somedomain.com");
-        TestHashlookUp(hashAddressBook, true,"Pat", "Jones","555-235-1114", "pjones@homesweethome.com");
-        TestHashlookUp(hashAddressBook, true,"Billy", "Kidd","555-235-1115", "billy_the_kid@nowhere.com");
-        TestHashDelete(hashAddressBook, true,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
-        TestHashInsert(hashAddressBook, true,"Test", "Case","555-235-1121", "Test_Case@testcase.com");
-        TestHashInsert(hashAddressBook, true,"Nadezhda", "Kanachekhovskaya","555-235-1122", "dr.nadezhda.kanacheckovskaya@somehospital.moscow.ci.ru");
-        TestHashInsert(hashAddressBook, true,"Jo", "Wu","555-235-1123", "wu@h.com");
-        TestHashInsert(hashAddressBook, true,"Millard", "Fillmore", "555-235-1124", "millard@theactualwhitehouse.us");
-        TestHashInsert(hashAddressBook, true,"Bob", "vanDyke", "555-235-1125", "vandyke@nodomain.com");
-        TestHashInsert(hashAddressBook, true,"Upside", "Down","555-235-1126", "upsidedown@rightsideup.com");
-        TestHashlookUp(hashAddressBook, true,"Jack", "Jones","555-235-1117", "jjones@hill.com");
-        TestHashlookUp(hashAddressBook, true,"Nadezhda", "Kanachekhovskaya","555-235-1122", "dr.nadezhda.kanacheckovskaya@somehospital.moscow.ci.ru");
-        TestHashDelete(hashAddressBook, true,"Jill", "Jones","555-235-1118", "jillj@hill.com");
-        TestHashDelete(hashAddressBook, false,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
-        TestHashlookUp(hashAddressBook, false,"Jill", "Jones","555-235-1118", "jillj@hill.com");
-        TestHashlookUp(hashAddressBook, true,"Jane", "Doe","555-235-1120", "jdoe@somedomain.com");
+        HashHashAddressBook hashHashAddressBook = new HashHashAddressBook(13);
+        TestHashInsert(hashHashAddressBook, true, "Bob", "Smith"," 555-235-1111", "bsmith@somewhere.com");
+        TestHashInsert(hashHashAddressBook, true,"Jane", "Williams"," 555-235-1112", "jw@something.com");
+        TestHashInsert(hashHashAddressBook, true,"Mohammed", "al-Salam","555-235-1113", "mas@someplace.com");
+        TestHashInsert(hashHashAddressBook, true,"Pat", "Jones","555-235-1114", "pjones@homesweethome.com");
+        TestHashInsert(hashHashAddressBook, true,"Billy", "Kidd","555-235-1115", "billy_the_kid@nowhere.com");
+        TestHashInsert(hashHashAddressBook, true,"H.", "Houdini","555-235-1116", "houdini@noplace.com");
+        TestHashInsert(hashHashAddressBook, true,"Jack", "Jones","555-235-1117", "jjones@hill.com");
+        TestHashInsert(hashHashAddressBook, true,"Jill", "Jones","555-235-1118", "jillj@hill.com");
+        TestHashInsert(hashHashAddressBook, true,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
+        TestHashInsert(hashHashAddressBook, true,"Jane", "Doe","555-235-1120", "jdoe@somedomain.com");
+        TestHashlookUp(hashHashAddressBook, true,"Pat", "Jones","555-235-1114", "pjones@homesweethome.com");
+        TestHashlookUp(hashHashAddressBook, true,"Billy", "Kidd","555-235-1115", "billy_the_kid@nowhere.com");
+        TestHashDelete(hashHashAddressBook, true,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
+        TestHashInsert(hashHashAddressBook, true,"Test", "Case","555-235-1121", "Test_Case@testcase.com");
+        TestHashInsert(hashHashAddressBook, true,"Nadezhda", "Kanachekhovskaya","555-235-1122", "dr.nadezhda.kanacheckovskaya@somehospital.moscow.ci.ru");
+        TestHashInsert(hashHashAddressBook, true,"Jo", "Wu","555-235-1123", "wu@h.com");
+        TestHashInsert(hashHashAddressBook, true,"Millard", "Fillmore", "555-235-1124", "millard@theactualwhitehouse.us");
+        TestHashInsert(hashHashAddressBook, true,"Bob", "vanDyke", "555-235-1125", "vandyke@nodomain.com");
+        TestHashInsert(hashHashAddressBook, true,"Upside", "Down","555-235-1126", "upsidedown@rightsideup.com");
+        TestHashlookUp(hashHashAddressBook, true,"Jack", "Jones","555-235-1117", "jjones@hill.com");
+        TestHashlookUp(hashHashAddressBook, true,"Nadezhda", "Kanachekhovskaya","555-235-1122", "dr.nadezhda.kanacheckovskaya@somehospital.moscow.ci.ru");
+        TestHashDelete(hashHashAddressBook, true,"Jill", "Jones","555-235-1118", "jillj@hill.com");
+        TestHashDelete(hashHashAddressBook, false,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
+        TestHashlookUp(hashHashAddressBook, false,"Jill", "Jones","555-235-1118", "jillj@hill.com");
+        TestHashlookUp(hashHashAddressBook, true,"Jane", "Doe","555-235-1120", "jdoe@somedomain.com");
 
         BinaryTree tree = new BinaryTree();
         TestTreeInsert(tree, true, "Bob", "Smith"," 555-235-1111", "bsmith@somewhere.com");
@@ -61,131 +63,120 @@ public class Main {
         TestTreeDelete(tree, false,"John", "Doe","555-235-1119", "jdoe@somedomain.com");
         TestTreelookUp(tree, false,"Jill", "Jones","555-235-1118", "jillj@hill.com");
         TestTreelookUp(tree, true,"Jane", "Doe","555-235-1120", "jdoe@somedomain.com");
+
+        printTotals();
     }
 
     private static void TestTreeInsert(BinaryTree tree, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d TREE insert Success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Insert Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d TREE insert failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Insert Failure of - %s %s", ++testCase, first, last));
 
-        TreeAddressMate result = tree.insert(first, last, phoneNum, email);
-        TreeAddressMate expected = new TreeAddressMate(first, last, phoneNum, email);
+        BinaryTreeAddress result = tree.insert(first, last, phoneNum, email);
+        BinaryTreeAddress expected = new BinaryTreeAddress(first, last, phoneNum, email);
 
         boolean same = false;
         if(result != null) {
             same = result.compareTo(expected) == 0;
         }
 
-        if (same == expectedResult) {
-            System.out.println(" - PASS");
-        } else {
-            System.out.println(" - FAIL");
-        }
+        passFail(same, expectedResult);
     }
 
     private static void TestTreelookUp(BinaryTree addressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d TREE lookup success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Lookup Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d TREE lookup failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Lookup Failure of - %s %s", ++testCase, first, last));
 
-        TreeAddressMate result = addressBook.lookup(first, last);
-        TreeAddressMate expected = new TreeAddressMate(first, last, phoneNum, email);
+        BinaryTreeAddress result = addressBook.lookup(first, last);
+        BinaryTreeAddress expected = new BinaryTreeAddress(first, last, phoneNum, email);
 
         boolean same = false;
         if(result != null) {
             same = result.compareTo(expected) == 0;
         }
 
-        if (same == expectedResult) {
-            System.out.println(" - PASS");
-        } else {
-            System.out.println(" - FAIL");
-        }
-
+        passFail(same, expectedResult);
     }
 
     private static void TestTreeDelete(BinaryTree addressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d TREE Delete success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Delete Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d TREE Delete failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d TREE Delete Failure of - %s %s", ++testCase, first, last));
 
-        TreeAddressMate result = addressBook.delete(first, last);
-        TreeAddressMate expected = new TreeAddressMate(first, last, phoneNum, email);
+        BinaryTreeAddress result = addressBook.delete(first, last);
+        BinaryTreeAddress expected = new BinaryTreeAddress(first, last, phoneNum, email);
         boolean same = false;
         if(result != null) {
             same = result.compareTo(expected) == 0;
         }
 
-        if (same == expectedResult) {
-            System.out.println(" - PASS");
-        } else {
-            System.out.println(" - FAIL");
-        }
-
+        passFail(same, expectedResult);
     }
 
-    private static void TestHashInsert(MeAddressBook addressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
+    private static void TestHashInsert(HashHashAddressBook hashAddressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d HASH insert success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Insert Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d HASH insert failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Insert Failure of - %s %s", ++testCase, first, last));
 
-        AddressMate result = addressBook.insert(first, last, phoneNum, email);
-        AddressMate expected = new AddressMate(first, last, phoneNum, email);
+        AddressBookHashBucket.HashAddress result = hashAddressBook.insert(first, last, phoneNum, email);
+        AddressBookHashBucket.HashAddress expected = new AddressBookHashBucket.HashAddress(first, last, phoneNum, email);
 
         boolean same = result.compareTo(expected) == 0;
 
-        if (same == expectedResult) {
-            System.out.println(" - PASS");
-        } else {
-            System.out.println(" - FAIL");
-        }
+        passFail(same, expectedResult);
     }
 
-    private static void TestHashlookUp(MeAddressBook addressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
+    private static void TestHashlookUp(HashHashAddressBook hashAddressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d HASH lookup success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Lookup Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d HASH lookup failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Lookup Failure of - %s %s", ++testCase, first, last));
 
-        AddressMate result = addressBook.lookUp(first, last);
-        AddressMate expected = new AddressMate(first, last, phoneNum, email);
+        AddressBookHashBucket.HashAddress result = hashAddressBook.lookUp(first, last);
+        AddressBookHashBucket.HashAddress expected = new AddressBookHashBucket.HashAddress(first, last, phoneNum, email);
 
         boolean same = false;
         if(result != null) {
             same = result.compareTo(expected) == 0;
         }
 
-        if (same == expectedResult) {
-            System.out.println(" - PASS");
-        } else {
-            System.out.println(" - FAIL");
-        }
-
+        passFail(same, expectedResult);
     }
 
-    private static void TestHashDelete(MeAddressBook addressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
+    private static void TestHashDelete(HashHashAddressBook hashAddressBook, boolean expectedResult, String first, String last, String phoneNum, String email) {
         if(expectedResult)
-            System.out.print(String.format("Test Case %d HASH Delete success of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Delete Success of - %s %s", ++testCase, first, last));
         else
-            System.out.print(String.format("Test Case %d HASH Delete failure of - %s %s", ++testCase, first, last));
+            System.out.print(String.format("Test Case %d HASH Delete Failure of - %s %s", ++testCase, first, last));
 
-        AddressMate result = addressBook.delete(first, last);
-        AddressMate expected = new AddressMate(first, last, phoneNum, email);
+        AddressBookHashBucket.HashAddress result = hashAddressBook.delete(first, last);
+        AddressBookHashBucket.HashAddress expected = new AddressBookHashBucket.HashAddress(first, last, phoneNum, email);
         boolean same = false;
         if(result != null) {
             same = result.compareTo(expected) == 0;
         }
 
-        if (same == expectedResult) {
+        passFail(same, expectedResult);
+    }
+
+    private static void passFail(boolean result, boolean expected) {
+        if (result == expected) {
             System.out.println(" - PASS");
+            ++passed;
         } else {
             System.out.println(" - FAIL");
+            ++failed;
         }
+    }
 
+    private static void printTotals() {
+        System.out.println(String.format("PASSED:\t %d\\%d --- %d%%", passed, testCase, passed/testCase * 100));
+        System.out.println(String.format("FAILED:\t %d\\%d --- %d%%", failed, testCase, failed/testCase * 100));
     }
 
 }
